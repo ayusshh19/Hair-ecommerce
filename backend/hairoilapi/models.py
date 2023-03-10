@@ -16,7 +16,6 @@ class Userregister(models.Model):
 class Usercoupon(models.Model):
     userid=models.ForeignKey(Userregister,on_delete=models.CASCADE)
     no_of_coupon=models.IntegerField(default=0)
-    reference=models.CharField(max_length=100)
     
 
     
