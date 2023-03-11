@@ -58,13 +58,14 @@ def coupon(request):
         try:
            userobj= Userregister.objects.get(unique_id=uniqueid)
            data['userid']=userobj.id
-           serializers=Usercouponserializer(data=request.data)
-           if serializers.is_valid():
-                my_object = Usercoupon.objects.filter(userid=userobj)
-                my_object.no_of_coupon += 1
-                my_object.save()
-                return Response({'msg':'Hurray New Coupon!!'},status=status.HTTP_200_OK)
-           return Response({'msg':serializers.errors},status=status.HTTP_403_FORBIDDEN)
+           my_object = Usercoupon.objects.update_or_create(id=data['userid'],defaults=data)
+           my_object.no_of_coupon += 1
+           my_object.save()
+                # return Response({'msg':'Hurray New Coupon!!'},status=status.HTTP_200_OK)
+           return Response({'msg':'Hurray New Coupon!!'},status=status.HTTP_403_FORBIDDEN)
         except:
           return Response({'msg':'SOMETHING WENT WRONG'},status=status.HTTP_403_FORBIDDEN)
+        #    serializers=Usercouponserializer(data=request.data)
+        #    if serializers.is_valid():
+        #         serializers.save()
         
