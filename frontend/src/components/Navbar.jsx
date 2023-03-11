@@ -57,10 +57,9 @@ export default function Navbar() {
 
 const Navbarcomponent = styled.div`
   width: 100%;
-  height: 4rem;
+  height: 10vh;
   display: flex;
   justify-content: center;
-  position: fixed;
   align-items: center;
   border-bottom: 0.3rem solid #02bb86;
   .navleft img {
