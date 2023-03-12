@@ -19,7 +19,7 @@ export default function Sellercards(props) {
 }
 
 const Sellercardscomponent=styled.div`
-   width: 300px;
+   width: 275px;
     height: 200px;
     background-color:  #02bb86;
     margin: 1rem;

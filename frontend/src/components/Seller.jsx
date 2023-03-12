@@ -49,6 +49,22 @@ const Sellercomponent = styled.div`
   display: flex;
   width: 100%;
   height: 90vh;
+  @media (max-width:990px) {
+    height: 100%;
+    flex-direction: column;
+    .sellerleft {
+    width: 100% !important;
+    height: 50% !important;
+  }
+  .sellerleft img {
+    width: 100%;
+    height: 100%;
+  }
+  .sellerright {
+    width: 100% !important;
+    height: 50% !important;
+  }
+  }
   .sellerleft {
     width: 50%;
     height: 100%;

@@ -52,6 +52,20 @@ const Contactcomponent = styled.div`
     padding: 2rem;
 
   }
+  @media (max-width: 990px) {
+    height: 100vh;
+    flex-direction: column-reverse;
+    .contactleft {
+    width: 100%;
+    height: 50%;
+    padding: 2rem;
+
+  }
+  .contactright {
+    width: 100% !important;
+    height: 50%;
+  }
+  }
   .contactright {
     width: 50%;
     height: 100%;

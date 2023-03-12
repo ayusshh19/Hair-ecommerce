@@ -167,7 +167,7 @@ const Navbarcomponent = styled.div`
     .navcenter {
       flex: 0;
       position: absolute;
-      top: 17%;
+      top: 8rem;
       right: 100%;
       width: 200px;
       height: 20vh;

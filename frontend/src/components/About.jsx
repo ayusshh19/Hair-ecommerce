@@ -105,6 +105,7 @@ const Aboutcomponent = styled.div`
     align-items: center;
   }
   @media (max-width:990px) {
+    height: 150vh;
     .Aboutcontent {
     width: 100%;
     height: 100vh;

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Maincomponent from "../components/Maincomponent";
 import Navbar from "../components/Navbar";
 import Seller from "../components/Seller";
+import Fixec from "../utils/Fixec";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Seller />
       <Contact />
       <Footer />
+      <Fixec />
     </>
   );
 }
