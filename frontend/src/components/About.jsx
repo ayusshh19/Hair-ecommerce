@@ -28,7 +28,7 @@ export default function About() {
           <img src={mainlogo} alt="" srcset="" />
         </div>
         <div className="aboutright">
-          <h1>About Us</h1>
+          <h1 className="abouttitle">About Us</h1>
           <h3>
             Sadhana Herbal Product in Kalyan is one of the leading businesses in
             the Hair Oil Manufacturers. Also known for Ayurvedic Doctors, Hair
@@ -141,7 +141,9 @@ const Aboutcomponent = styled.div`
     justify-content: center;
     align-items: center;
   }
-
+  .abouttitle{
+    color: #02bb86;
+  }
   .aboutleft img {
     width: 30%;
     height: 80%;
@@ -151,6 +153,7 @@ const Aboutcomponent = styled.div`
     width: 50%;
     height: 50%;
     box-sizing: border-box;
+    /* text-align: center; */
   }
   .sliderabout {
     width: 80%;
