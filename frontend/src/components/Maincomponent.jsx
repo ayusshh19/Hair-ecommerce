@@ -13,7 +13,7 @@ export default function Maincomponent() {
     setadditem(!Additem);
   };
   return (
-    <Maincontainer>
+    <Maincontainer id="home">
       <div className="css-blurry-gradient"></div>
       <div className="css-blurry-gradient1"></div>
       <div className="mainleft">

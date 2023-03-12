@@ -9,7 +9,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import StorefrontIcon from '@mui/icons-material/Storefront';
 export default function Seller() {
   return (
-    <Sellercomponent>
+    <Sellercomponent id="seller">
       <div className="sellerleft">
         <img src={seller} alt="" srcset="" />
       </div>

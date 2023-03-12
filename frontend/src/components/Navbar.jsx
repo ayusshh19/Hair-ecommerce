@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Navlogo from "../assets/sadhana-hairoil-logo.png";
-import { Link } from "react-router-dom";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from "react-scroll";
+
 
 export default function Navbar() {
   const count = useSelector((state) => state.counter.value);
@@ -36,16 +36,16 @@ export default function Navbar() {
       <div className="navcenter">
         <ul>
           <li>
-            <Link to={""}>Home</Link>
+            <Link to={"home"} smooth={true} duration={500} className="link-pointer">Home</Link>
           </li>
           <li>
-            <Link to={""}>About</Link>
+            <Link to={"about"} smooth={true} duration={500} className="link-pointer">About</Link>
           </li>
           <li>
-            <Link to={""}>Become A Seller</Link>
+            <Link to={"seller"} smooth={true} duration={500} className="link-pointer">Become A Seller</Link>
           </li>
           <li>
-            <Link to={""}>Contact</Link>
+            <Link to={"contact"} smooth={true} duration={500} className="link-pointer">Contact</Link>
           </li>
         </ul>
       </div>
@@ -102,6 +102,9 @@ const Navbarcomponent = styled.div`
     justify-content: center;
     align-items: center;
   }
+  .link-pointer:hover {
+  cursor: pointer;
+}
   .navcenter ul {
     display: flex;
     justify-content: space-evenly;

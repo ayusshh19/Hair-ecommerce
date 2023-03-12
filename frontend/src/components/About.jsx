@@ -22,7 +22,7 @@ import Cards from "../utils/Cards";
 export default function About() {
   SwiperCore.use([Autoplay]);
   return (
-    <Aboutcomponent>
+    <Aboutcomponent id="about">
       <div className="Aboutcontent">
         <div className="aboutleft">
           <img src={mainlogo} alt="" srcset="" />
