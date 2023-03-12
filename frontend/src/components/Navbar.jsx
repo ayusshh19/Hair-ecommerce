@@ -9,11 +9,16 @@ import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-scroll";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  let navigate = useNavigate();
   const count = useSelector((state) => state.counter.value);
   const [close, setclose] = useState(false);
+  const navigationtopage=()=>{
+    console.log('hu')
+    navigate('/signup')
+  }
   const menuhandle = () => {
     const menu = document.querySelector(".navcenter");
     menu.classList.toggle("open");
@@ -62,8 +67,8 @@ export default function Navbar() {
             </IconButton>
           </div>
         </div>
-        <div className="navbutton">
-          <Navbutton>
+        <div className="navbutton" onClick={navigationtopage}>
+          <Navbutton >
             Sign Up <LoginIcon />
           </Navbutton>
         </div>
