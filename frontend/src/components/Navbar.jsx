@@ -8,8 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import MailIcon from "@mui/icons-material/Mail";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function Navbar() {
@@ -74,12 +73,16 @@ export default function Navbar() {
 }
 
 const Navbarcomponent = styled.div`
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
   border-bottom: 0.3rem solid #02bb86;
+  z-index: 100;
   .navleft img {
     width: 10rem;
     height: 3rem;

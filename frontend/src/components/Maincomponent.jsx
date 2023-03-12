@@ -57,7 +57,7 @@ export default function Maincomponent() {
 const Maincontainer = styled.div`
   display: flex;
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   .mainleft {
     width: 50%;
     display: flex;
@@ -118,7 +118,7 @@ const Maincontainer = styled.div`
   }
   .mainright img {
     width: 60%;
-    height: 100%;
+    height: 80%;
   }
   @media (max-width: 990px) {
     flex-direction: column-reverse;
