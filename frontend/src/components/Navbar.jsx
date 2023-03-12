@@ -2,19 +2,33 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Navlogo from "../assets/sadhana-hairoil-logo.png";
 import { Link } from "react-router-dom";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
+import MailIcon from "@mui/icons-material/Mail";
+import { useSelector, useDispatch } from "react-redux";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function Navbar() {
+  const count = useSelector((state) => state.counter.value);
   const [close, setclose] = useState(false);
   const menuhandle = () => {
     const menu = document.querySelector(".navcenter");
     menu.classList.toggle("open");
     setclose(!close);
   };
-
+  function notificationsLabel(count) {
+    if (count === 0) {
+      return 'no notifications';
+    }
+    if (count > 99) {
+      return 'more than 99 notifications';
+    }
+    return `${count} notifications`;
+  }
   return (
     <Navbarcomponent>
       <div className="navleft">
@@ -42,7 +56,11 @@ export default function Navbar() {
             {close ? <CloseIcon /> : <MenuIcon />}
           </div>
           <div className="icon-shopping">
-            <ShoppingCartIcon />
+            <IconButton aria-label={notificationsLabel(count)}>
+              <Badge badgeContent={count} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
           </div>
         </div>
         <div className="navbutton">
@@ -125,8 +143,8 @@ const Navbarcomponent = styled.div`
     display: none;
   }
   .navbutton button {
-      width: 100%;
-    }
+    width: 100%;
+  }
   @media (max-width: 990px) {
     height: 6rem;
     .menu-open {
