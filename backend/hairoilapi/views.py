@@ -3,13 +3,32 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import Registerserializer,Productpurchaseserializer,Deliveryserializer,Usercouponserializer
-from .models import Userregister,Usercoupon
+from .models import Userregister,Usercoupon,Productpurchase,Delivery
 # Create your views here.
 
 @api_view(['GET','POST'])
 def home(request):
     return Response({'msg':'Welcome user to our ecommerce'},status=status.HTTP_200_OK)
 
+@api_view(['GET','POST'])        
+def loginuser(request):
+    if request.method=='GET':
+        return Response({'msg':'Welcome user login to proceed!!'},status=status.HTTP_200_OK)
+    
+    if request.method=='POST':
+        username=request.data['username']
+        password=request.data['password']
+        try:
+          userexist=Userregister.objects.filter(username=username,password=password)
+          if userexist.exists():
+              request.session['username']=username
+              Userregister.save()
+              userserial=Registerserializer(userexist,many=True)
+              return Response({'msg':'successfully logged in!!','user':userserial.data},status=status.HTTP_200_OK)
+          return Response({'msg':'Pls register yourself before login!!'},status=status.HTTP_404_NOT_FOUND)
+        except :
+          return Response({'msg':'Something went wrong!!'},status=status.HTTP_404_NOT_FOUND)
+    
 @api_view(['GET','POST'])
 def registerUser(request):
     if request.method=='GET':
@@ -68,4 +87,41 @@ def coupon(request):
         #    serializers=Usercouponserializer(data=request.data)
         #    if serializers.is_valid():
         #         serializers.save()
-        
+@api_view(['GET','POST'])        
+def adminpanel(request):
+    if request.method=='GET':
+            try:
+              userobj=Userregister.objects.all()
+              cartproducts=Productpurchase.objects.all()
+              getaddress=Delivery.objects.all()
+              userserializer=Registerserializer(userobj,many=True)
+              productserializer=Productpurchaseserializer(cartproducts,many=True)
+              addresserializer=Deliveryserializer(getaddress,many=True)
+              return Response({'userlist':userserializer.data,'productlist':productserializer.data,'addresslist':addresserializer.data},status=status.HTTP_200_OK)
+            except:
+              return Response({'msg':'something went wrong!!!'},status=status.HTTP_200_OK)
+    return Response({'msg':'something went wrong!!!'},status=status.HTTP_200_OK)
+
+@api_view(['GET','POST'])
+def purchasecompletion(request):
+    if request.method=='GET':
+        return Response({'msg':'Complete product purchase'},status=status.HTTP_200_OK)
+    
+    if request.method=='POST':
+        username=request.data['username']
+        userobj=Userregister.objects.filter(username=username)
+        product=Productpurchase.objects.filter(userid=userobj).update(paymentcompletion=True)
+        productserializer=Productpurchaseserializer(product,many=True)
+        return Response({'msg':productserializer.data},status=status.HTTP_200_OK)
+
+@api_view(['GET','POST'])
+def returnpayment(request):
+    if request.method=='GET':
+        return Response({'msg':'Pay return payment'},status=status.HTTP_200_OK)
+    
+    if request.method=='POST':
+        username=request.data['username']
+        userobj=Userregister.objects.filter(username=username)
+        product=Productpurchase.objects.filter(userid=userobj).update(sellerstatus=True)
+        productserializer=Productpurchaseserializer(product,many=True)
+        return Response({'msg':productserializer.data},status=status.HTTP_200_OK)

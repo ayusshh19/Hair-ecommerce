@@ -12,6 +12,7 @@ class Userregister(models.Model):
     password=models.CharField(max_length=100)
     registertime=models.TimeField(auto_now_add=True)
     issseller=models.BooleanField(default=False)
+    isadmin=models.BooleanField(default=False)
     unique_id = models.UUIDField(default=generate_uuid, editable=False, unique=True)
     
 class Usercoupon(models.Model):
