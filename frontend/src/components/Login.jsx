@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { setvaluesdata } from "../app/action";
+import { setvaluesdata,setloading } from "../app/action";
 export default function Login(props) {
   const dispatch = useDispatch();
   const navigate=useNavigate()
@@ -20,20 +20,19 @@ export default function Login(props) {
   });
   const handlesubmit = async (e) => {
     e.preventDefault();
+    dispatch(setloading())
     const { email, password } = values;
     const { data } = await axios.post("http://127.0.0.1:8000/login/", {
       email,
       password,
     });
-    console.log('data')
-    console.log(data)
+    dispatch(setloading())
     dispatch(setvaluesdata({
       username:data.user[0].username,
       isseller:data.user[0].issseller,
       isadmin:data.user[0].isadmin
     }))
     if (data.status === 404) {
-
       toast.error(data.response.data.msg);
     } else {
       toast.success(data.msg, toastobj);

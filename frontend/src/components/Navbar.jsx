@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 
@@ -16,10 +16,10 @@ export default function Navbar() {
   const count = useSelector((state) => state.counter.value);
   const userdetails = useSelector((state) => state.counter.userdetails);
   const [close, setclose] = useState(false);
-  const navigationtopage=()=>{
-    console.log('hu')
-    navigate('/signup')
-  }
+  const navigationtopage = () => {
+    console.log("hu");
+    navigate("/signup");
+  };
   const menuhandle = () => {
     const menu = document.querySelector(".navcenter");
     menu.classList.toggle("open");
@@ -27,15 +27,15 @@ export default function Navbar() {
   };
   function notificationsLabel(count) {
     if (count === 0) {
-      return 'no notifications';
+      return "no notifications";
     }
     if (count > 99) {
-      return 'more than 99 notifications';
+      return "more than 99 notifications";
     }
     return `${count} notifications`;
   }
-  console.log('user')
-  console.log(userdetails)
+  console.log("user");
+  console.log(userdetails);
   return (
     <Navbarcomponent>
       <div className="navleft">
@@ -44,16 +44,44 @@ export default function Navbar() {
       <div className="navcenter">
         <ul>
           <li>
-            <Link onClick={()=>navigate('/')} smooth={true} duration={500} className="link-pointer">Home</Link>
+            <Link
+              onClick={() => navigate("/")}
+              smooth={true}
+              duration={500}
+              className="link-pointer"
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={"about"} smooth={true} duration={500} className="link-pointer">About</Link>
+            <Link
+              to={"about"}
+              smooth={true}
+              duration={500}
+              className="link-pointer"
+            >
+              About
+            </Link>
           </li>
           <li>
-            <Link to={"seller"} smooth={true} duration={500} className="link-pointer">Become A Seller</Link>
+            <Link
+              to={"seller"}
+              smooth={true}
+              duration={500}
+              className="link-pointer"
+            >
+              Become A Seller
+            </Link>
           </li>
           <li>
-            <Link to={"contact"} smooth={true} duration={500} className="link-pointer">Contact</Link>
+            <Link
+              to={"contact"}
+              smooth={true}
+              duration={500}
+              className="link-pointer"
+            >
+              Contact
+            </Link>
           </li>
         </ul>
       </div>
@@ -70,19 +98,15 @@ export default function Navbar() {
             </IconButton>
           </div>
         </div>
-        {
-          userdetails.username==''?(
-            <div className="navbutton" onClick={navigationtopage}>
-          <Navbutton >
-            Sign Up <LoginIcon />
-          </Navbutton>
-        </div>
-          ):(
-            <div className="username"> {userdetails.username}
-
-            </div>
-          )
-        }
+        {userdetails.username === "" ? (
+          <div className="navbutton" onClick={navigationtopage}>
+            <Navbutton>
+              Sign Up <LoginIcon />
+            </Navbutton>
+          </div>
+        ) : (
+          <div className="username"> {userdetails.username}</div>
+        )}
       </div>
     </Navbarcomponent>
   );
@@ -103,7 +127,7 @@ const Navbarcomponent = styled.div`
     width: 10rem;
     height: 3rem;
   }
-  .username{
+  .username {
     color: #02bb86;
     font-weight: bold;
     font-size: 1.3rem;
@@ -124,8 +148,8 @@ const Navbarcomponent = styled.div`
     align-items: center;
   }
   .link-pointer:hover {
-  cursor: pointer;
-}
+    cursor: pointer;
+  }
   .navcenter ul {
     display: flex;
     justify-content: space-evenly;

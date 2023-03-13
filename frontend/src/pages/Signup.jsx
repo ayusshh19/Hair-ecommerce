@@ -4,22 +4,30 @@ import signup from '../assets/login.png'
 import Login from '../components/Login'
 import Navbar from '../components/Navbar'
 import Register from '../components/Register'
+import { useSelector } from "react-redux";
+import Loading from './Loading'
 export default function Signup() {
     const [login,setlogin]=useState(true)
+    const loading = useSelector((state) => state.counter.loading);
   return (
    <>
-   <Navbar />
-    <Signupcomponent>
+   {
+    !loading?(
+        <><Navbar /><Signupcomponent>
 
-        <div className="signupcontainer">
-            <div className="signuplogo">
-                <img src={signup} alt="" />
-            </div>
-            <div className="mainsignupcontent">
-               {login? <Login setlogin={setlogin} value={login}/>:<Register setlogin={setlogin} value={login}/>}
-            </div>
-        </div>
-    </Signupcomponent>
+                      <div className="signupcontainer">
+                          <div className="signuplogo">
+                              <img src={signup} alt="" />
+                          </div>
+                          <div className="mainsignupcontent">
+                              {login ? <Login setlogin={setlogin} value={login} /> : <Register setlogin={setlogin} value={login} />}
+                          </div>
+                      </div>
+                  </Signupcomponent></>
+    ):(
+        <Loading />
+    )
+   }
    </>
   )
 }

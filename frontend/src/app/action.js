@@ -6,7 +6,8 @@ const initialState = {
     username:"",
     isseller:"",
     isadmin:""
-  }
+  },
+  loading:false
 
 }
 
@@ -27,11 +28,14 @@ export const counterSlice = createSlice({
     },
     setvaluesdata:(state,action)=>{
       state.userdetails=action.payload
+    },
+    setloading:(state)=>{
+      state.loading=!state.loading
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount ,setvaluesdata} = counterSlice.actions
+export const { increment, decrement, incrementByAmount ,setvaluesdata,setloading} = counterSlice.actions
 
 export default counterSlice.reducer
