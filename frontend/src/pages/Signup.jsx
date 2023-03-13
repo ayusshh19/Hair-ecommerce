@@ -1,18 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import signup from '../assets/login.png'
+import Login from '../components/Login'
+import Navbar from '../components/Navbar'
+import Register from '../components/Register'
 export default function Signup() {
+    const [login,setlogin]=useState(true)
   return (
+   <>
+   <Navbar />
     <Signupcomponent>
+
         <div className="signupcontainer">
             <div className="signuplogo">
                 <img src={signup} alt="" />
             </div>
             <div className="mainsignupcontent">
-
+               {login? <Login setlogin={setlogin} value={login}/>:<Register setlogin={setlogin} value={login}/>}
             </div>
         </div>
     </Signupcomponent>
+   </>
   )
 }
 
@@ -21,12 +29,32 @@ const Signupcomponent=styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
-    background-color: aqua;
+    height: 90vh;
     .signupcontainer{
         width: 70%;
         height: 70%;
-        background-color: beige;
+        /* background-color: beige; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    @media (max-width:990px) {
+        height: 100vh;
+        .signupcontainer{
+            width: 100%;
+            height: 100vh;
+        flex-direction: column;
+    }
+    .signuplogo{
+        width: 100% !important;
+        height: 50%;
+    }
+    .mainsignupcontent{
+        width:100% !important;
+        height: 50% !important;
+        margin-bottom: 2rem !important;
+
+    }
     }
     .signuplogo{
         width: 50%;
@@ -39,6 +67,7 @@ const Signupcomponent=styled.div`
     .mainsignupcontent{
         width: 50%;
         height: 100%;
+
     }
 `
 

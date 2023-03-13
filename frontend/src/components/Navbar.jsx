@@ -41,7 +41,7 @@ export default function Navbar() {
       <div className="navcenter">
         <ul>
           <li>
-            <Link to={"home"} smooth={true} duration={500} className="link-pointer">Home</Link>
+            <Link onClick={()=>navigate('/')} smooth={true} duration={500} className="link-pointer">Home</Link>
           </li>
           <li>
             <Link to={"about"} smooth={true} duration={500} className="link-pointer">About</Link>
