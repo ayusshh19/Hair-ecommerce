@@ -37,8 +37,8 @@ class Delivery(models.Model):
     pincode=models.CharField(max_length=100)
     
 class Order(models.Model):
-    userid=models.ForeignKey(Userregister,on_delete=models.CASCADE)
-    prodid=models.ForeignKey(Productpurchase,on_delete=models.CASCADE)
+    userid=models.ForeignKey(Userregister,default='',on_delete=models.CASCADE)
+    prodid=models.ForeignKey(Productpurchase,default='',on_delete=models.CASCADE)
     order_product = models.CharField(max_length=100)
     order_amount = models.CharField(max_length=25)
     order_payment_id = models.CharField(max_length=100)
