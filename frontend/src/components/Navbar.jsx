@@ -17,7 +17,6 @@ export default function Navbar() {
   const userdetails = useSelector((state) => state.counter.userdetails);
   const [close, setclose] = useState(false);
   const navigationtopage = () => {
-    console.log("hu");
     navigate("/signup");
   };
   const menuhandle = () => {

@@ -5,7 +5,9 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "../app/action";
 import PaymentsIcon from "@mui/icons-material/Payments";
+import { useNavigate } from "react-router-dom";
 export default function Maincomponent() {
+  let navigate = useNavigate();
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
   const [Additem, setadditem] = useState(true);
@@ -41,7 +43,7 @@ export default function Maincomponent() {
                 +
               </div>
             </Increment>
-            <Navbutton>
+            <Navbutton onClick={()=>navigate('/payment')}>
               Proceed To Payment <PaymentsIcon />
             </Navbutton>
           </>

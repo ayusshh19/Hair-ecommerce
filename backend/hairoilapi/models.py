@@ -29,6 +29,7 @@ class Productpurchase(models.Model):
     
 class Delivery(models.Model):
     prodid=models.ForeignKey(Productpurchase,on_delete=models.CASCADE)
+    buildingaddress=models.CharField(max_length=100,default='')
     city=models.CharField(max_length=100)
     state=models.CharField(max_length=100)
     address=models.CharField(max_length=1000)
