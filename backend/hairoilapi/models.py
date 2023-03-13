@@ -11,13 +11,12 @@ class Userregister(models.Model):
     phonenumber=models.CharField(max_length=100)
     password=models.CharField(max_length=100)
     registertime=models.TimeField(auto_now_add=True)
+    issseller=models.BooleanField(default=False)
     unique_id = models.UUIDField(default=generate_uuid, editable=False, unique=True)
     
 class Usercoupon(models.Model):
     userid=models.ForeignKey(Userregister,on_delete=models.CASCADE)
     no_of_coupon=models.IntegerField(default=0)
-    
-
     
 class Productpurchase(models.Model):
     userid=models.ForeignKey(Userregister,on_delete=models.CASCADE)
@@ -25,6 +24,7 @@ class Productpurchase(models.Model):
     productname=models.CharField(max_length=100)
     purchasetime=models.TimeField(auto_now_add=True)
     paymentcompletion=models.BooleanField(default=False)
+    sellerstatus=models.BooleanField(default=False)
     
 class Delivery(models.Model):
     prodid=models.ForeignKey(Productpurchase,on_delete=models.CASCADE)
