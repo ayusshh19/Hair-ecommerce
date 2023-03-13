@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import Seller from "../components/Seller";
 import Fixec from "../utils/Fixec";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <>
       <Navbar />

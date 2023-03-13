@@ -16,13 +16,13 @@ def loginuser(request):
         return Response({'msg':'Welcome user login to proceed!!'},status=status.HTTP_200_OK)
     
     if request.method=='POST':
-        username=request.data['username']
+        email=request.data['email']
         password=request.data['password']
         try:
-          userexist=Userregister.objects.filter(username=username,password=password)
-          if userexist.exists():
-              request.session['username']=username
-              Userregister.save()
+          userexist=Userregister.objects.filter(email=email,password=password)
+          print(userexist)
+          if userexist:
+              request.session['email']=email
               userserial=Registerserializer(userexist,many=True)
               return Response({'msg':'successfully logged in!!','user':userserial.data},status=status.HTTP_200_OK)
           return Response({'msg':'Pls register yourself before login!!'},status=status.HTTP_404_NOT_FOUND)
@@ -105,7 +105,7 @@ def adminpanel(request):
 @api_view(['GET','POST'])
 def purchasecompletion(request):
     if request.method=='GET':
-        return Response({'msg':'Complete product purchase'},status=status.HTTP_200_OK)
+        return Response({'msg':'Complete product purchase '},status=status.HTTP_200_OK)
     
     if request.method=='POST':
         username=request.data['username']

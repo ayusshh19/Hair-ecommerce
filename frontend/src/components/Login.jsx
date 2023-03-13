@@ -1,13 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyIcon from "@mui/icons-material/Key";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { setvaluesdata } from "../app/action";
 export default function Login(props) {
+  const dispatch = useDispatch();
+  const navigate=useNavigate()
+  const [values, setvalues] = useState({
+    email: "",
+    password: "",
+  });
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = values;
+    const { data } = await axios.post("http://127.0.0.1:8000/login/", {
+      email,
+      password,
+    });
+    console.log('data')
+    console.log(data)
+    dispatch(setvaluesdata({
+      username:data.user[0].username,
+      isseller:data.user[0].issseller,
+      isadmin:data.user[0].isadmin
+    }))
+    if (data.status === 404) {
+
+      toast.error(data.response.data.msg);
+    } else {
+      toast.success(data.msg, toastobj);
+      navigate("/", { state: { username: data.user.username, isseller: data.user.isseller ,isadmin: data.user.isadmin } });
+      setvalues({
+        email: "",
+        password: "",
+      });
+    }
+  };
+  const toastobj = {
+    position: "top-center",
+    autoClose: 6000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
+  const handlechange = (e) => {
+    setvalues({ ...values, [e.target.name]: e.target.value});
+  };
   return (
     <Logincomponent>
+      <ToastContainer />
       <h1 className="logintitle">Login</h1>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <EmailIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
@@ -16,6 +65,9 @@ export default function Login(props) {
           id="input-with-sx"
           label="Enter Email"
           variant="standard"
+          name="email"
+          value={values.email}
+          onChange={(e) => handlechange(e)}
         />
       </Box>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -25,10 +77,25 @@ export default function Login(props) {
           id="input-with-sx"
           label="Enter password"
           variant="standard"
+          name="password"
+          value={values.password}
+          onChange={(e) => handlechange(e)}
         />
       </Box>
-      <Navbutton>Login <LoginIcon /></Navbutton>
-      <p>Dont have an account?<a onClick={()=>{props.setlogin(!props.value)}}> Register here</a></p>
+      <Navbutton onClick={handlesubmit}>
+        Login <LoginIcon />
+      </Navbutton>
+      <p>
+        Dont have an account?
+        <span
+          onClick={() => {
+            props.setlogin(!props.value);
+          }}
+        >
+          {" "}
+          Register here
+        </span>
+      </p>
     </Logincomponent>
   );
 }
@@ -39,13 +106,13 @@ const Logincomponent = styled.div`
     color: #02bb86;
     text-align: center;
   }
-  .MuiBox-root{
+  .MuiBox-root {
     margin: 2rem;
   }
-  p{
+  p {
     text-align: center;
   }
-  p a{
+  p span{
     color: blue;
     cursor: pointer;
   }

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   let navigate = useNavigate();
   const count = useSelector((state) => state.counter.value);
+  const userdetails = useSelector((state) => state.counter.userdetails);
   const [close, setclose] = useState(false);
   const navigationtopage=()=>{
     console.log('hu')
@@ -33,6 +34,8 @@ export default function Navbar() {
     }
     return `${count} notifications`;
   }
+  console.log('user')
+  console.log(userdetails)
   return (
     <Navbarcomponent>
       <div className="navleft">
@@ -67,11 +70,19 @@ export default function Navbar() {
             </IconButton>
           </div>
         </div>
-        <div className="navbutton" onClick={navigationtopage}>
+        {
+          userdetails.username==''?(
+            <div className="navbutton" onClick={navigationtopage}>
           <Navbutton >
             Sign Up <LoginIcon />
           </Navbutton>
         </div>
+          ):(
+            <div className="username"> {userdetails.username}
+
+            </div>
+          )
+        }
       </div>
     </Navbarcomponent>
   );
@@ -91,6 +102,11 @@ const Navbarcomponent = styled.div`
   .navleft img {
     width: 10rem;
     height: 3rem;
+  }
+  .username{
+    color: #02bb86;
+    font-weight: bold;
+    font-size: 1.3rem;
   }
   .navleft {
     flex: 1;
