@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Userregister,Usercoupon,Delivery,Productpurchase
+from .models import Userregister,Usercoupon,Delivery,Productpurchase,Order
 
 
 class Registerserializer(serializers.ModelSerializer):
@@ -21,3 +21,11 @@ class Productpurchaseserializer(serializers.ModelSerializer):
     class Meta:
         model=Productpurchase
         fields='__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_date = serializers.DateTimeField(format="%d %B %Y %I:%M %p")
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+        depth = 2

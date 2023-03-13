@@ -36,4 +36,14 @@ class Delivery(models.Model):
     landmark=models.CharField(max_length=100)
     pincode=models.CharField(max_length=100)
     
-    
+class Order(models.Model):
+    userid=models.ForeignKey(Userregister,on_delete=models.CASCADE)
+    prodid=models.ForeignKey(Productpurchase,on_delete=models.CASCADE)
+    order_product = models.CharField(max_length=100)
+    order_amount = models.CharField(max_length=25)
+    order_payment_id = models.CharField(max_length=100)
+    isPaid = models.BooleanField(default=False)
+    order_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.order_product
