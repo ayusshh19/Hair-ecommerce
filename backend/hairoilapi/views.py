@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import environ
+import razorpay
 from .serializers import Registerserializer,Productpurchaseserializer,Deliveryserializer,Usercouponserializer
 from .models import Userregister,Usercoupon,Productpurchase,Delivery
 # Create your views here.
@@ -48,10 +50,13 @@ def Purchase(request):
         return Response({'msg':'Please Select Products'},status=status.HTTP_200_OK)
     
     if request.method=='POST':
+        username=request.data['username']
+        userobj=Userregister.objects.get(username=username)
+        request.data['userid']=userobj.id
         serializers=Productpurchaseserializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
-            return Response({'msg':'Payment Successfull Thank you!!'},status=status.HTTP_200_OK)
+            return Response({'msg':'Payment Successfull Thank you!!','proddata':serializers.data},status=status.HTTP_200_OK)
         return Response({'msg':serializers.errors},status=status.HTTP_403_FORBIDDEN)
 
 @api_view(['GET','POST'])

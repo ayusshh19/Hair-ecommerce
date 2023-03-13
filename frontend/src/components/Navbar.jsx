@@ -121,7 +121,7 @@ const Navbarcomponent = styled.div`
   align-items: center;
   background-color: white;
   border-bottom: 0.3rem solid #02bb86;
-  z-index: 100;
+  z-index: 1000;
   .navleft img {
     width: 10rem;
     height: 3rem;
