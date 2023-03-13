@@ -8,35 +8,37 @@ import LoginIcon from "@mui/icons-material/Login";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from 'react-redux';
-import { setvaluesdata,setloading } from "../app/action";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setvaluesdata, setloading } from "../app/action";
 export default function Login(props) {
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [values, setvalues] = useState({
     email: "",
     password: "",
   });
   const handlesubmit = async (e) => {
     e.preventDefault();
-    dispatch(setloading())
+    dispatch(setloading());
     const { email, password } = values;
     const { data } = await axios.post("http://127.0.0.1:8000/login/", {
       email,
       password,
     });
-    dispatch(setloading())
-    dispatch(setvaluesdata({
-      username:data.user[0].username,
-      isseller:data.user[0].issseller,
-      isadmin:data.user[0].isadmin
-    }))
+    dispatch(setloading());
+    dispatch(
+      setvaluesdata({
+        username: data.user[0].username,
+        isseller: data.user[0].issseller,
+        isadmin: data.user[0].isadmin,
+      })
+    );
     if (data.status === 404) {
       toast.error(data.response.data.msg);
     } else {
       toast.success(data.msg, toastobj);
-      navigate("/", { state: { username: data.user.username, isseller: data.user.isseller ,isadmin: data.user.isadmin } });
+      navigate("/");
       setvalues({
         email: "",
         password: "",
@@ -51,7 +53,7 @@ export default function Login(props) {
     theme: "dark",
   };
   const handlechange = (e) => {
-    setvalues({ ...values, [e.target.name]: e.target.value});
+    setvalues({ ...values, [e.target.name]: e.target.value });
   };
   return (
     <Logincomponent>
@@ -111,7 +113,7 @@ const Logincomponent = styled.div`
   p {
     text-align: center;
   }
-  p span{
+  p span {
     color: blue;
     cursor: pointer;
   }
