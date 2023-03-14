@@ -38,6 +38,8 @@ export default function Login(props) {
       toast.error(data.response.data.msg);
     } else {
       toast.success(data.msg, toastobj);
+      localStorage.setItem('username',data.user[0].username)
+      localStorage.setItem('isseller',data.user[0].isseller)
       navigate("/");
       setvalues({
         email: "",

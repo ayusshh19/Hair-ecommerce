@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navlogo from "../assets/sadhana-hairoil-logo.png";
 import LoginIcon from "@mui/icons-material/Login";
@@ -10,8 +10,10 @@ import { useSelector } from "react-redux";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setvaluesdata } from "../app/action";
 export default function Navbar() {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const count = useSelector((state) => state.counter.value);
   const userdetails = useSelector((state) => state.counter.userdetails);
@@ -33,8 +35,18 @@ export default function Navbar() {
     }
     return `${count} notifications`;
   }
-  console.log("user");
-  console.log(userdetails);
+  useEffect(()=>{
+    const username=localStorage.getItem('username')
+    const isseller=localStorage.getItem('isseller')
+    if(username){
+      dispatch(
+        setvaluesdata({
+          username: username,
+          isseller: isseller,
+        })
+      );
+    }
+  },[])
   return (
     <Navbarcomponent>
       <div className="navleft">

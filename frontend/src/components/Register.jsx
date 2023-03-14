@@ -33,7 +33,7 @@ export default function Register(props) {
     e.preventDefault();
     console.log(checked)
     dispatch(setloading());
-    const { username, email, password, phonenumber, issseller } =
+    const { username, email, password, phonenumber } =
       values;
     const { data } = await axios.post("https://backendrail-production.up.railway.app/register/", {
       username,
@@ -53,6 +53,8 @@ export default function Register(props) {
       toast.error(data.response.data.msg);
     } else {
       toast.success(data.msg, toastobj);
+      localStorage.setItem('username',username)
+      localStorage.setItem('isseller',checked)
       navigate("/");
       setvalues({
         username: "",

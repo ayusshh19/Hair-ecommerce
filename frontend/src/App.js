@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Loading from './pages/Loading';
 import Payment from './pages/Payment';
 import Paymentpage from './pages/Paymentpage';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/loading' element={<Loading />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/makepayment' element={<Paymentpage />} />
+          <Route path='/admin' element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
