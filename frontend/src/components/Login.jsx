@@ -40,6 +40,7 @@ export default function Login(props) {
       toast.success(data.msg, toastobj);
       localStorage.setItem('username',data.user[0].username)
       localStorage.setItem('isseller',data.user[0].isseller)
+      localStorage.setItem('isadmin',data.user[0].username==='ayusshh19'?true:false)
       navigate("/");
       setvalues({
         email: "",

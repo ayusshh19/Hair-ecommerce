@@ -18,6 +18,7 @@ export default function Navbar() {
   const count = useSelector((state) => state.counter.value);
   const userdetails = useSelector((state) => state.counter.userdetails);
   const [close, setclose] = useState(false);
+  console.log(localStorage.getItem('isadmin'))
   const navigationtopage = () => {
     navigate("/signup");
   };
@@ -94,6 +95,18 @@ export default function Navbar() {
               Contact
             </Link>
           </li>
+          {
+            localStorage.getItem('isadmin')?(<li>
+              <Link
+                onClick={() => navigate("/admin")}
+                smooth={true}
+                duration={500}
+                className="link-pointer"
+              >
+                Admin
+              </Link>
+            </li>):''
+          }
         </ul>
       </div>
       <div className="navright">
