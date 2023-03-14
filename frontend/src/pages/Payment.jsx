@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Payment() {
   const bottomRef = useRef(null);
   const navigate = useNavigate();
+  const [showaddress,setshowaddress]=useState(false)
   const [prodid, setprodid] = useState(0);
   const userdetails = useSelector((state) => state.counter.userdetails);
   const count = useSelector((state) => state.counter.value);
@@ -35,6 +36,7 @@ export default function Payment() {
   });
   const handlepayment=async (e)=>{
     e.preventDefault();
+    setshowaddress(!showaddress)
     dispatch(setloading());
     const proddata  = await axios.post("https://backendrail-production.up.railway.app/purchase/", {
       username:userdetails.username,
@@ -46,6 +48,7 @@ export default function Payment() {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' });
 
     })
+    
   }
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -126,7 +129,9 @@ export default function Payment() {
               onClick={handlepayment}>₹ {1999 * count}</Navbutton>
             </div>
           </div>
-          <div className="address" ref={bottomRef}>
+          {
+            showaddress?(
+              <div className="address" ref={bottomRef}>
             <h1 className="addresstitle">Delivery Address</h1>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <ApartmentIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
@@ -212,6 +217,8 @@ export default function Payment() {
             </div>
             <Navbutton onClick={handlesubmit}>Proceed to payment</Navbutton>
           </div>
+            ):''
+          }
         </div>
       </Paymentcontainer>
     </>

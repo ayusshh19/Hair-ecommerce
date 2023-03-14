@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import mainlogo from "../assets/image5.jpeg";
+import mainlogo from "../assets/image2.jpeg";
 import baby from "../assets/cardimages/baby.png";
 import hairloss from "../assets/cardimages/hairloss.png";
 import natural from "../assets/cardimages/natural.png";
@@ -117,7 +117,7 @@ const Aboutcomponent = styled.div`
   }
 
   .aboutleft img {
-    width:  100%;
+    width:  60% !important;
     height: 100%;
   }
   .aboutright {
