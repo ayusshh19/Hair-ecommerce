@@ -22,7 +22,7 @@ export default function Login(props) {
     e.preventDefault();
     dispatch(setloading());
     const { email, password } = values;
-    const { data } = await axios.post("http://127.0.0.1:8000/login/", {
+    const { data } = await axios.post("https://backendrail-production.up.railway.app/login/", {
       email,
       password,
     });

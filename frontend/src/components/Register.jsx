@@ -35,7 +35,7 @@ export default function Register(props) {
     dispatch(setloading());
     const { username, email, password, phonenumber, issseller } =
       values;
-    const { data } = await axios.post("http://127.0.0.1:8000/register/", {
+    const { data } = await axios.post("https://backendrail-production.up.railway.app/register/", {
       username,
       email,
       password,

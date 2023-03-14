@@ -15,7 +15,7 @@ function Paymentpage() {
       bodyData.append("response", JSON.stringify(response));
 
       await Axios({
-        url: `http://127.0.0.1:8000/payment/success/`,
+        url: `https://backendrail-production.up.railway.app/payment/success/`,
         method: "POST",
         data: bodyData,
         headers: {
@@ -53,7 +53,7 @@ function Paymentpage() {
     bodyData.append("name", name);
 
     const data = await Axios({
-      url: `http://127.0.0.1:8000/pay/`,
+      url: `https://backendrail-production.up.railway.app/pay/`,
       method: "POST",
       headers: {
         Accept: "application/json",

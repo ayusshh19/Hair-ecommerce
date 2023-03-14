@@ -36,7 +36,7 @@ export default function Payment() {
   const handlepayment=async (e)=>{
     e.preventDefault();
     dispatch(setloading());
-    const proddata  = await axios.post("http://127.0.0.1:8000/purchase/", {
+    const proddata  = await axios.post("https://backendrail-production.up.railway.app/purchase/", {
       username:userdetails.username,
       productprice:count*1999,
       productname:'Sadhana Hair oil'
@@ -52,7 +52,7 @@ export default function Payment() {
     dispatch(setloading());
     const { buildingaddress, city, state, address, landmark, pincode } = values;
 
-    const { data } = await axios.post("http://127.0.0.1:8000/address/", {
+    const { data } = await axios.post("https://backendrail-production.up.railway.app/address/", {
       prodid:prodid,
       buildingaddress,
       city,
