@@ -51,8 +51,10 @@ export default function Payment() {
     }).then((data)=>{
       console.log(data.data.proddata.id)
       setprodid(data.data.proddata.id)
+      toast.success('Payment added!!!', toastobj)
       bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-
+    }).catch(()=>{
+      toast.error('Click on purchase again');
     })
     
   }
@@ -74,8 +76,8 @@ export default function Payment() {
     if (data.status === 404) {
       toast.error(data.response.data.msg);
     } else {
-      toast.success(data.msg, toastobj);
-      navigate("/makepayment");
+      toast.success('address added', toastobj);
+      navigate("/");
       setvalues({
         buildingaddress: "",
         city: "",

@@ -35,13 +35,14 @@ export default function Register(props) {
     dispatch(setloading());
     const { username, email, password, phonenumber ,reference} =
       values;
+    const referencedata=reference?reference:'admin'
     const { data } = await axios.post("https://backendrail-production.up.railway.app/register/", {
       username,
       email,
       password,
       phonenumber,
       issseller:checked,
-      reference
+      reference:referencedata
     }).catch((response)=>{
       dispatch(setloading());
       toast.error('please fill all responses properly');
@@ -56,7 +57,7 @@ export default function Register(props) {
       toast.error(data.response.data.msg);
     } else {
       dispatch(setloading());
-      toast.success(data.msg, toastobj);
+      // toast.success(data.msg, toastobj);
       localStorage.setItem('username',username)
       localStorage.setItem('isseller',checked)
       navigate("/");
