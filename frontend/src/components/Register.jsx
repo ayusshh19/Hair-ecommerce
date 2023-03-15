@@ -27,19 +27,21 @@ export default function Register(props) {
     password: "",
     phonenumber: "",
     isseller: "",
-    cpassword:""
+    cpassword:"",
+    reference:""
   });
   const handlesubmit = async (e) => {
     e.preventDefault();
     dispatch(setloading());
-    const { username, email, password, phonenumber } =
+    const { username, email, password, phonenumber ,reference} =
       values;
     const { data } = await axios.post("https://backendrail-production.up.railway.app/register/", {
       username,
       email,
       password,
       phonenumber,
-      issseller:checked
+      issseller:checked,
+      reference
     }).catch((response)=>{
       dispatch(setloading());
       toast.error('please fill all responses properly');
@@ -64,7 +66,8 @@ export default function Register(props) {
         password: "",
         phonenumber: "",
         isseller: "",
-        cpassword:""
+        cpassword:"",
+        reference:""
       });
     }
   };
@@ -139,6 +142,18 @@ export default function Register(props) {
           variant="standard"
           name="cpassword"
           value={values.cpassword}
+          onChange={(e) => handlechange(e)}
+        />
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <PasswordIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+        <TextField
+          fullWidth
+          id="input-with-sx"
+          label="Please user reference username"
+          variant="standard"
+          name="reference"
+          value={values.reference}
           onChange={(e) => handlechange(e)}
         />
       </Box>
