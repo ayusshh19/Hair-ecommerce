@@ -4,7 +4,7 @@ import React, { useState } from "react";
 function Paymentpage() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
-
+  
 // this function will handel payment when user submit his/her money
 // and it will confim if payment is successfull or not
   const handlePaymentSuccess = async (response) => {

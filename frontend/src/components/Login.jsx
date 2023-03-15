@@ -20,13 +20,19 @@ export default function Login(props) {
   });
   const handlesubmit = async (e) => {
     e.preventDefault();
-    dispatch(setloading());
     const { email, password } = values;
-    const { data } = await axios.post("https://backendrail-production.up.railway.app/login/", {
-      email,
-      password,
-    });
     dispatch(setloading());
+    const { data } = await axios.post(
+      "https://backendrail-production.up.railway.app/login/",
+      {
+        email,
+        password,
+      }
+    ).catch((response)=>{
+      dispatch(setloading());
+      toast.error('Please enter correct detail of email and password');
+    });
+    // dispatch(setloading());
     dispatch(
       setvaluesdata({
         username: data.user[0].username,
@@ -34,13 +40,18 @@ export default function Login(props) {
         isadmin: data.user[0].isadmin,
       })
     );
+    console.log(data.status);
     if (data.status === 404) {
-      toast.error(data.response.data.msg);
+      
     } else {
+      dispatch(setloading());
       toast.success(data.msg, toastobj);
-      localStorage.setItem('username',data.user[0].username)
-      localStorage.setItem('isseller',data.user[0].isseller)
-      localStorage.setItem('isadmin',data.user[0].username==='ayusshh19'?true:false)
+      localStorage.setItem("username", data.user[0].username);
+      localStorage.setItem("isseller", data.user[0].isseller);
+      localStorage.setItem(
+        "isadmin",
+        data.user[0].username === "ayusshh19" ? true : false
+      );
       navigate("/");
       setvalues({
         email: "",
@@ -132,4 +143,5 @@ const Navbutton = styled.button`
   justify-content: space-evenly;
   align-items: center;
   margin: auto;
+  cursor: pointer;
 `;

@@ -31,7 +31,6 @@ export default function Register(props) {
   });
   const handlesubmit = async (e) => {
     e.preventDefault();
-    console.log(checked)
     dispatch(setloading());
     const { username, email, password, phonenumber } =
       values;
@@ -41,8 +40,10 @@ export default function Register(props) {
       password,
       phonenumber,
       issseller:checked
+    }).catch((response)=>{
+      dispatch(setloading());
+      toast.error('please fill all responses properly');
     });
-    dispatch(setloading());
     dispatch(
       setvaluesdata({
         username: username,
@@ -52,6 +53,7 @@ export default function Register(props) {
     if (data.status === 404) {
       toast.error(data.response.data.msg);
     } else {
+      dispatch(setloading());
       toast.success(data.msg, toastobj);
       localStorage.setItem('username',username)
       localStorage.setItem('isseller',checked)
@@ -68,7 +70,7 @@ export default function Register(props) {
   };
   const toastobj = {
     position: "top-center",
-    autoClose: 6000,
+    autoClose: 4000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",
@@ -193,4 +195,5 @@ const Navbutton = styled.button`
   justify-content: space-evenly;
   align-items: center;
   margin: auto;
+  cursor: pointer;
 `;

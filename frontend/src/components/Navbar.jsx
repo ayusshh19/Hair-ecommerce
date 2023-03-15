@@ -18,7 +18,6 @@ export default function Navbar() {
   const count = useSelector((state) => state.counter.value);
   const userdetails = useSelector((state) => state.counter.userdetails);
   const [close, setclose] = useState(false);
-  console.log(localStorage.getItem('isadmin'))
   const navigationtopage = () => {
     navigate("/signup");
   };
@@ -36,10 +35,20 @@ export default function Navbar() {
     }
     return `${count} notifications`;
   }
-  useEffect(()=>{
-    const username=localStorage.getItem('username')
-    const isseller=localStorage.getItem('isseller')
-    if(username){
+  const logout = () => {
+    localStorage.clear();
+    dispatch(
+      setvaluesdata({
+        username: "",
+        isseller: "",
+      })
+    );
+    navigate("/");
+  };
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    const isseller = localStorage.getItem("isseller");
+    if (username) {
       dispatch(
         setvaluesdata({
           username: username,
@@ -47,7 +56,7 @@ export default function Navbar() {
         })
       );
     }
-  },[])
+  }, []);
   return (
     <Navbarcomponent>
       <div className="navleft">
@@ -95,8 +104,8 @@ export default function Navbar() {
               Contact
             </Link>
           </li>
-          {
-            localStorage.getItem('isadmin')?(<li>
+          {localStorage.getItem("isadmin") ? (
+            <li>
               <Link
                 onClick={() => navigate("/admin")}
                 smooth={true}
@@ -105,8 +114,10 @@ export default function Navbar() {
               >
                 Admin
               </Link>
-            </li>):''
-          }
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
       <div className="navright">
@@ -129,7 +140,13 @@ export default function Navbar() {
             </Navbutton>
           </div>
         ) : (
-          <div className="username"> {userdetails.username}</div>
+          <div className="username">
+            {" "}
+            {userdetails.username}
+            <Navbutton onClick={logout}>
+              Log out <LoginIcon />
+            </Navbutton>
+          </div>
         )}
       </div>
     </Navbarcomponent>
@@ -155,6 +172,10 @@ const Navbarcomponent = styled.div`
     color: #02bb86;
     font-weight: bold;
     font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
   }
   .navleft {
     flex: 1;
@@ -286,4 +307,5 @@ const Navbutton = styled.button`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
 `;
