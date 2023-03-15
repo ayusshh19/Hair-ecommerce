@@ -90,4 +90,5 @@ const Navbutton = styled.button`
   justify-content: space-evenly;
   align-items: center;
   margin: auto;
+  cursor: pointer;
 `;

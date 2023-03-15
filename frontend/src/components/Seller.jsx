@@ -10,10 +10,10 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 export default function Seller() {
   return (
     <Sellercomponent id="seller">
-      <div className="sellerleft">
+      <div className="sellerleft" data-aos="fade-down-right">
         <img src={seller} alt="" srcset="" />
       </div>
-      <div className="sellerright">
+      <div className="sellerright" data-aos="fade-down-left">
         <h1 className="benefitstitle">Benefits</h1>
         <div className="rightcontent">
           <Sellercards

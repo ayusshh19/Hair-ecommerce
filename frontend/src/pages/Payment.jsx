@@ -1,10 +1,10 @@
-import React, { useState,useRef } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import imglogo from "../assets/mainlogo.png";
-import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../app/action";
+import { useDispatch,useSelector } from "react-redux";
 import {  setloading } from "../app/action";
+import { decrement, increment } from "../app/action";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -26,6 +26,12 @@ export default function Payment() {
   const userdetails = useSelector((state) => state.counter.userdetails);
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (!username) {
+      navigate("/");
+    }
+  },[])
   const [values, setvalues] = useState({
     buildingaddress: "",
     city: "",
@@ -345,11 +351,13 @@ const Navbutton = styled.button`
   justify-content: space-evenly;
   align-items: center;
   margin: 1rem;
+  cursor: pointer;
 `;
 const Increment = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   .additem {
     /* flex: 1; */
     padding: 0.6rem;

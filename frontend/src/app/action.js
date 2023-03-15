@@ -5,9 +5,11 @@ const initialState = {
   userdetails:{
     username:"",
     isseller:"",
-    isadmin:""
+    isadmin:"",
+    errormessage:''
   },
-  loading:false
+  loading:false,
+  
 
 }
 

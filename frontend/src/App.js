@@ -7,8 +7,18 @@ import Loading from './pages/Loading';
 import Payment from './pages/Payment';
 import Paymentpage from './pages/Paymentpage';
 import Admin from './pages/Admin';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from 'react';
+//useEffect
 function App() {
+  useEffect(() => {
+    AOS.init();
+    AOS.init({
+      duration: 1000,
+    });
+    AOS.refresh();
+  }, []);
   return (
     <BrowserRouter>
       <Routes>

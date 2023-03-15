@@ -24,10 +24,10 @@ export default function About() {
   return (
     <Aboutcomponent id="about">
       <div className="Aboutcontent">
-        <div className="aboutleft">
+        <div className="aboutleft" data-aos="fade-up">
           <img src={mainlogo} alt="" srcset="" />
         </div>
-        <div className="aboutright">
+        <div className="aboutright" data-aos="zoom-out-left">
           <h1 className="abouttitle">About Us</h1>
           <h3>
             Sadhana Herbal Product in Kalyan is one of the leading businesses in

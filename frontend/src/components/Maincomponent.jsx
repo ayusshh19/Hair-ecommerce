@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "../app/action";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { useNavigate } from "react-router-dom";
+
 export default function Maincomponent() {
   let navigate = useNavigate();
   const count = useSelector((state) => state.counter.value);
@@ -43,13 +44,13 @@ export default function Maincomponent() {
                 +
               </div>
             </Increment>
-            <Navbutton onClick={()=>navigate('/payment')}>
+            <Navbutton onClick={() => navigate("/payment")}>
               Proceed To Payment <PaymentsIcon />
             </Navbutton>
           </>
         )}
       </div>
-      <div className="mainright">
+      <div className="mainright" data-aos="zoom-in-up">
         <img src={mainlogo} alt="" srcset="" />
       </div>
     </Maincontainer>
@@ -132,7 +133,7 @@ const Maincontainer = styled.div`
       padding: 0;
       height: 40%;
     }
-    .leftmain{
+    .leftmain {
       font-size: 1rem;
     }
     .mainright {
@@ -153,10 +154,10 @@ const Maincontainer = styled.div`
       left: 50%;
     }
     h3 {
-    font-size: 1rem;
-    text-align: center;
-    margin: 0;
-  }
+      font-size: 1rem;
+      text-align: center;
+      margin: 0;
+    }
   }
 `;
 const Navbutton = styled.button`
@@ -170,12 +171,14 @@ const Navbutton = styled.button`
   justify-content: space-around;
   align-items: center;
   gap: 1rem;
+  cursor: pointer;
 `;
 
 const Increment = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   .additem {
     /* flex: 1; */
     padding: 0.6rem;
