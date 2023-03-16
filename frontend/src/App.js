@@ -10,6 +10,7 @@ import Admin from './pages/Admin';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from 'react';
+import Tree from './components/Tree';
 //useEffect
 function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/payment' element={<Payment />} />
           <Route path='/makepayment' element={<Paymentpage />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/Tree' element={<Tree />} />
       </Routes>
     </BrowserRouter>
   );

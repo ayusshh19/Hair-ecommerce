@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Admincards from "../components/Admincards";
 import CollapsibleTable from "../components/Table";
+import Tree from "../components/Tree";
 export default function Admin() {
   const navigate = useNavigate();
   const [propsdata,setpropsdata]=useState(false)
@@ -14,6 +15,7 @@ export default function Admin() {
     totolrevenue: 0,
     refundpendeing: 0,
   });
+  const [tree,settree]=useState(false)
   useEffect(() => {
     const username = localStorage.getItem("username");
     if (!username) {
@@ -33,7 +35,6 @@ export default function Admin() {
       const totalamount = countnumtotal.reduce((curren, accumulator) => {
         return curren + accumulator;
       }, 0);
-      console.log(admindata.data)
       
       setadmincount({
         ...admincount,
@@ -43,7 +44,6 @@ export default function Admin() {
         refundpendeing: seller.length,
       });
       setpropsdata(await admindata.data)
-      console.log(admindata.data)
     };
     getdata();
   }, []);
@@ -56,7 +56,8 @@ export default function Admin() {
         <Admincards num={admincount.totolrevenue} text={'Total revenue earned through online transaction'}/>
         <Admincards num={admincount.refundpendeing} text={'people remaining to refund money'}/>
       </Admincomponent>
-      {propsdata?<CollapsibleTable propsdata={propsdata}/>:''}
+      <Navbutton onClick={()=>settree(!tree)} >{tree?'Get Data':'Get Tree'}</Navbutton>
+      {tree?<Tree propsdata={propsdata}/>:(propsdata?<CollapsibleTable propsdata={propsdata}/>:'')}
     </>
   );
 }
@@ -68,4 +69,17 @@ display: flex;
 justify-content: space-evenly;
 flex-wrap: wrap;
 align-items: center;
+`;
+const Navbutton = styled.button`
+  padding: 0.8rem 2.5rem;
+  background-color: #02bb86;
+  border: none;
+  border-radius: 0.6rem;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto;
+  cursor: pointer;
 `;
