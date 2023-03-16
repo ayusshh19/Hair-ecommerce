@@ -48,7 +48,17 @@ const convertToTree = (dataget) => {
       tree[node.id] = node;
       tree[node.id].children = {};
     } else {
-      const parentNode = data[node.reference];
+      const newdata = Object.keys(data)
+        .map((key) => data[key])
+        .map((data, index) => {
+          if (node.id !== data.id && node.reference === data.username) {
+            return index;
+          }
+        });
+      const filterdata = newdata.filter((data) => {
+        return data !== undefined;
+      });
+      const parentNode = data[filterdata[0]];
       if (!parentNode.children) {
         parentNode.children = {};
       }
@@ -58,35 +68,42 @@ const convertToTree = (dataget) => {
   });
   return tree;
 };
+function isObject(val) {
+  if (val === null) { return false;}
+  return ( (typeof val === 'function') || (typeof val === 'object') );
+}
 const Tree = (props) => {
   const [treeconvert, settreedata] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     settreedata([
-        {
-          id: "0",
-          username: "Sadhana ajit pande",
-          reference: Object.keys(convertToTree(props.propsdata.userlist)).map(
-            (key) => convertToTree(props.propsdata.userlist)[key]
-          ),
-        },
-      ]);
-  },[])
+      {
+        id: "0",
+        username: "Sadhana ajit pande",
+        reference: Object.keys(convertToTree(props.propsdata.userlist)).map(
+          (key) => convertToTree(props.propsdata.userlist)[key]
+        ),
+      },
+    ]);
+    console.log(treeconvert);
+  }, []);
   const treeRendering = (treeData) => {
-    console.log(treeData)
+    console.log(treeData);
     return (
       <>
         <ul>
           {treeData?.map((item) => (
             // console.log(item)
             <li className={item.username + item.id}>
-              <div><h3>{item.username}</h3>
+              <div>
+                <h3>{item.username}</h3>
               </div>
-              {(item.reference) && Array.isArray(item.reference)  
-                ? treeRendering(item.reference)
+              {item.reference && (Array.isArray(item.reference)) || item.children!=={}
+                ? (Array.isArray(item.reference)?treeRendering(item.reference):treeRendering(Object.keys(item.children).map(
+                  (key) => item.children[key]
+                )))
                 : ""}
             </li>
-          )
-          )}
+          ))}
         </ul>
       </>
     );
